@@ -18,7 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.ederson.curso.domain.enums.PerfilCliente;
+import com.ederson.curso.domain.enums.Perfil;
 import com.ederson.curso.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -56,7 +56,7 @@ public class Cliente implements Serializable {
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {
-		addPerfil(PerfilCliente.CLIENTE);
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
@@ -67,7 +67,7 @@ public class Cliente implements Serializable {
 		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = (tipo == null)? null : tipo.getCod();
 		this.senha = senha;
-		addPerfil(PerfilCliente.CLIENTE);
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Integer getId() {
@@ -114,12 +114,12 @@ public class Cliente implements Serializable {
 		return senha;
 	}
 	
-	public Set<PerfilCliente> getPerfis(){
+	public Set<Perfil> getPerfis(){
 		
-		return perfis.stream().map(perfil -> PerfilCliente.toEnum(perfil)).collect(Collectors.toSet());
+		return perfis.stream().map(perfil -> Perfil.toEnum(perfil)).collect(Collectors.toSet());
 	}
 	
-	public void addPerfil(PerfilCliente perfil) {
+	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCod());
 	}
 

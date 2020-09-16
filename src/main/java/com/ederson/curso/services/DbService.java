@@ -20,7 +20,7 @@ import com.ederson.curso.domain.PagamentoComCartao;
 import com.ederson.curso.domain.Pedido;
 import com.ederson.curso.domain.Produto;
 import com.ederson.curso.domain.enums.EstadoPagamento;
-import com.ederson.curso.domain.enums.PerfilCliente;
+import com.ederson.curso.domain.enums.Perfil;
 import com.ederson.curso.domain.enums.TipoCliente;
 import com.ederson.curso.repositories.CategoriaRepository;
 import com.ederson.curso.repositories.CidadeRepository;
@@ -116,12 +116,12 @@ public class DbService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Cliente cli1 = new Cliente(null, "Ederson Silva", "ederson88847103@gmail.com", "36378912377", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("edede") );
+		Cliente cli1 = new Cliente(null, "Ederson Silva", "ederson88847103@gmail.com", "36378912377", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("123") );
 		
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 		
-		Cliente cli2 = new Cliente(null, "Ederson Davi", "silvaedersonqueiros@gmail.com", "66933158012", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("edede") );
-		cli2.addPerfil(PerfilCliente.ADMIN);
+		Cliente cli2 = new Cliente(null, "Ederson Davi", "silvaedersonqueiros@gmail.com", "66933158012", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("123") );
+		cli2.addPerfil(Perfil.ADMIN);
 		cli2.getTelefones().addAll(Arrays.asList("2736223323", "93838528393"));
 		
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);

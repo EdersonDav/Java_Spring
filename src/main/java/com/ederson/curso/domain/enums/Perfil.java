@@ -1,14 +1,14 @@
 package com.ederson.curso.domain.enums;
 
-public enum PerfilCliente {
-
+public enum Perfil {
+	
 	ADMIN(1, "ROLE_ADMIN"),
 	CLIENTE(2, "ROLE_CLIENTE");
 	
 	private int cod;
 	private String descricao;
 	
-	private PerfilCliente(int cod, String descricao) {
+	private Perfil(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -21,13 +21,13 @@ public enum PerfilCliente {
 		return descricao;
 	}
 	
-	public static PerfilCliente toEnum(Integer cod) {
+	public static Perfil toEnum(Integer cod) {
 		
 		if (cod == null) {
 			return null;
 		}
 		
-		for (PerfilCliente x : PerfilCliente.values()) {
+		for (Perfil x : Perfil.values()) {
 			if (cod.equals(x.getCod())) {
 				return x;
 			}
@@ -35,5 +35,5 @@ public enum PerfilCliente {
 		
 		throw new IllegalArgumentException("Id inválido: " + cod);
 	}
-	
+
 }

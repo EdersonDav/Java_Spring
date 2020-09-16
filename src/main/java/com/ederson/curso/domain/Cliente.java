@@ -5,17 +5,20 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.ederson.curso.domain.enums.PerfilCliente;
 import com.ederson.curso.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -44,11 +47,16 @@ public class Cliente implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {
+		addPerfil(PerfilCliente.CLIENTE);
 	}
 
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
@@ -59,6 +67,7 @@ public class Cliente implements Serializable {
 		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = (tipo == null)? null : tipo.getCod();
 		this.senha = senha;
+		addPerfil(PerfilCliente.CLIENTE);
 	}
 
 	public Integer getId() {
@@ -103,6 +112,15 @@ public class Cliente implements Serializable {
 	
 	public String getSenha() {
 		return senha;
+	}
+	
+	public Set<PerfilCliente> getPerfis(){
+		
+		return perfis.stream().map(perfil -> PerfilCliente.toEnum(perfil)).collect(Collectors.toSet());
+	}
+	
+	public void addPerfil(PerfilCliente perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	public void setSenha(String senha) {
